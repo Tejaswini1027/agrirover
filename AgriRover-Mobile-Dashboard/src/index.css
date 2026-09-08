@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+@theme {
+    --color-ink: #0b0f0c;
+    --color-canvas: #f4f6f2;
+    --color-panel: #ffffff;
+    --color-panel-soft: #eef1ea;
+    --color-line: #dfe3d9;
+    --color-muted: #5b6357;
+    --color-text: #10140f;
+
+    --color-accent: #7bd83f;
+    --color-accent-ink: #0c2a06;
+    --color-accent-soft: #e4f8d4;
+
+    --color-amber: #f2a33d;
+    --color-amber-soft: #fdecd3;
+
+    --color-sky: #3fb0d8;
+    --color-sky-soft: #dbf3fa;
+
+    --color-rose: #e5484d;
+    --color-rose-soft: #fbdada;
+
+    --font-display: "Manrope", sans-serif;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+}
+
+:root[data-theme="dark"] {
+    --color-ink: #eef1ea;
+    --color-canvas: #0b0f0c;
+    --color-panel: #12160f;
+    --color-panel-soft: #171c13;
+    --color-line: #262c20;
+    --color-muted: #97a08c;
+    --color-text: #eef1ea;
+
+    --color-accent: #9ef25a;
+    --color-accent-ink: #0c2a06;
+    --color-accent-soft: #1c2f10;
+
+    --color-amber: #f7b85c;
+    --color-amber-soft: #2e2312;
+
+    --color-sky: #6bc9ea;
+    --color-sky-soft: #12262c;
+
+    --color-rose: #f47b7e;
+    --color-rose-soft: #331416;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body, #root { height: 100%; }
+
+body {
+    margin: 0;
+    background: radial-gradient(1200px 800px at 15% -10%, color-mix(in srgb, var(--color-accent) 6%, transparent), transparent 60%), var(--color-canvas);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    transition: background 200ms ease, color 200ms ease;
+}
+
+/* ---- Card hover lift (Panel, StatTile) ---- */
+.card-lift {
+    transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.card-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -8px color-mix(in srgb, var(--color-ink) 18%, transparent);
+}
+
+/* ---- Tone-accented top border for stat tiles ---- */
+.stat-tile { border-top: 3px solid transparent; }
+.stat-tile--good { border-top-color: var(--color-accent); }
+.stat-tile--warn { border-top-color: var(--color-amber); }
+.stat-tile--bad { border-top-color: var(--color-rose); }
+.stat-tile--info { border-top-color: var(--color-sky); }
+
+/* ---- Ambient glow for the AI insight card ---- */
+.ai-insight-glow {
+    box-shadow: 0 20px 50px -20px color-mix(in srgb, var(--color-accent) 45%, transparent);
+}
+
+/* ---- Left accent bar for zone / alert rows ---- */
+.accent-bar { border-left: 3px solid transparent; }
+.accent-bar--good { border-left-color: var(--color-accent); }
+.accent-bar--warn { border-left-color: var(--color-amber); }
+.accent-bar--bad { border-left-color: var(--color-rose); }
+.accent-bar--info { border-left-color: var(--color-sky); }
+
+.font-display { font-family: var(--font-display); }
+.font-mono { font-family: var(--font-mono); }
+
+.msr {
+    font-family: 'Material Symbols Rounded';
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    font-variation-settings: 'FILL' 0, 'wght' 450, 'GRAD' 0, 'opsz' 24;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-line); border-radius: 999px; }
+
+@keyframes fade-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+}
+.pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
+
+@keyframes ring-sweep {
+    from { stroke-dashoffset: var(--ring-from); }
+    to { stroke-dashoffset: var(--ring-to); }
+}
+
+.tab-indicator {
+    transition: transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1), width 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.leaflet-container {
+    background: var(--color-panel-soft) !important;
+    font-family: var(--font-body);
+}
+
+/* ---- Auth: dark Apple-style glassmorphism, independent of the app's own
+   light/dark theme toggle — the sign-in/sign-up experience always uses this
+   look regardless of dashboard theme. ---- */
+.agv-auth {
+    --agv-glass-bg: color-mix(in srgb, #0e1712 78%, transparent);
+    --agv-glass-border: color-mix(in srgb, #ffffff 10%, transparent);
+    --agv-glass-hi: color-mix(in srgb, #ffffff 6%, transparent);
+    --agv-ink: #f3f6ef;
+    --agv-muted: #9aa694;
+    background: #060a07;
+    color: var(--agv-ink);
+    min-height: 100dvh;
+}
+
+.agv-glass-card {
+    background: var(--agv-glass-bg);
+    border: 1px solid var(--agv-glass-border);
+    backdrop-filter: blur(28px) saturate(140%);
+    -webkit-backdrop-filter: blur(28px) saturate(140%);
+    box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.7), inset 0 1px 0 var(--agv-glass-hi);
+}
+
+.agv-glass-input {
+    background: color-mix(in srgb, #ffffff 6%, transparent);
+    border: 1px solid color-mix(in srgb, #ffffff 12%, transparent);
+    color: var(--agv-ink);
+}
+.agv-glass-input::placeholder { color: var(--agv-muted); }
+.agv-glass-input:focus { border-color: color-mix(in srgb, var(--color-accent) 70%, transparent); outline: none; }
+
+@keyframes agv-scan-line {
+    0% { transform: translateY(-100%); opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { transform: translateY(100%); opacity: 0; }
+}
+.agv-scan-line { animation: agv-scan-line 1.8s ease-in-out infinite; }
+
+@keyframes agv-pop-in {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+}
+.agv-pop-in { animation: agv-pop-in 380ms cubic-bezier(0.34, 1.56, 0.64, 1) both; }

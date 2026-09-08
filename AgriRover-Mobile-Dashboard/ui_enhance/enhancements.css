@@ -1,0 +1,94 @@
+/* AgriVision Command Deck — UI Enhancement Pass
+   Simple, attractive, status-highlighted styling.
+   Paste into your global stylesheet (or add as a new file and import it
+   after your existing styles so these rules can override where needed). */
+
+/* ---- Page background: subtle gradient instead of flat gray ---- */
+body {
+  background: linear-gradient(180deg, #f6f9f3 0%, #eef3ea 60%, #eaf1e4 100%);
+}
+
+/* ---- Header polish ---- */
+header {
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+}
+header button {
+  transition: background-color .15s ease, transform .15s ease;
+  border-radius: 999px;
+}
+header button:hover {
+  background-color: rgba(90, 158, 60, 0.12);
+  transform: translateY(-1px);
+}
+
+/* ---- Stat cards: soft elevation + hover lift ---- */
+main .bg-panel {
+  box-shadow: 0 1px 2px rgba(16, 24, 12, 0.04), 0 4px 14px rgba(16, 24, 12, 0.06);
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+main .bg-panel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(16, 24, 12, 0.06), 0 10px 24px rgba(16, 24, 12, 0.10);
+}
+
+/* Status-color top accents — add the matching class to each stat card,
+   or target by data attribute / nth-child as your markup allows. */
+.stat-card--field-health,
+.stat-card--soil-moisture   { border-top: 3px solid #5db33c; }
+.stat-card--rover-battery,
+.stat-card--gps-fix         { border-top: 3px solid #3b82f6; }
+.stat-card--canopy-temp     { border-top: 3px solid #f59e0b; }
+.stat-card--risk-index      { border-top: 3px solid #ef4444; }
+
+/* ---- Primary CTA buttons: colored glow ---- */
+button.btn-primary,
+main button.bg-green,
+main button[class*="bg-emerald"] {
+  box-shadow: 0 6px 16px rgba(93, 179, 60, 0.35);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+button.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(93, 179, 60, 0.45);
+}
+
+/* ---- Bottom nav: frosted glass dock ---- */
+nav {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px) saturate(1.4);
+  box-shadow: 0 -4px 20px rgba(16,24,12,0.10), 0 2px 8px rgba(16,24,12,0.06);
+  border-top: 1px solid rgba(16,24,12,0.06);
+}
+nav button {
+  transition: transform .15s ease;
+}
+nav button:active {
+  transform: scale(0.94);
+}
+
+/* ---- Headings: tighter, stronger hierarchy ---- */
+main h1, main h2, main h3 {
+  letter-spacing: -0.01em;
+}
+
+/* ---- AI Insight card: ambient glow ---- */
+.ai-insight-card {
+  box-shadow: 0 8px 30px rgba(20, 40, 15, 0.25);
+}
+
+/* ---- Field Zone mini-cards: left accent matching status dot ---- */
+.zone-card--optimal   { border-left: 3px solid #7bd83f; }
+.zone-card--attention { border-left: 3px solid #e5484d; }
+.zone-card--stress    { border-left: 3px solid #f2a33d; }
+
+/* ---- Priority Alert rows: left accent + tinted icon badge ---- */
+.alert-row--critical { border-left: 3px solid #ef4444; padding-left: 10px; border-radius: 10px; }
+.alert-row--warning  { border-left: 3px solid #f59e0b; padding-left: 10px; border-radius: 10px; }
+.alert-row--critical .alert-icon-badge { background-color: rgba(239,68,68,0.13); color: #ef4444; }
+.alert-row--warning  .alert-icon-badge { background-color: rgba(245,158,11,0.13); color: #f59e0b; }
+
+/* ---- Nav overlap fix (map/content bottom padding for fixed nav) ---- */
+main {
+  padding-bottom: 80px;
+}

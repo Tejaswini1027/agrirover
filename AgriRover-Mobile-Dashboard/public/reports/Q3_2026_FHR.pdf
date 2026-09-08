@@ -1,0 +1,73 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 804 >>
+stream
+BT
+/F1 16 Tf
+72 720 Td
+18 TL
+(Comprehensive Field Health Report - Q3 2026) Tj
+/F1 11 Tf
+T*
+(Generated: 2026-09-07    Farm: Demo Farm    Sector: A) Tj
+T*
+() Tj
+T*
+(Field health index ............ 87 / 100) Tj
+T*
+(Mean soil moisture ........... 42 %) Tj
+T*
+(Canopy temperature .......... 31.4 C) Tj
+T*
+(Aggregate risk index ......... 18 / 100) Tj
+T*
+() Tj
+T*
+(Zone summary:) Tj
+T*
+(  A1  health 92  moisture 42%  status Optimal) Tj
+T*
+(  A2  health 72  moisture 26%  status Attention) Tj
+T*
+(  A3  health 65  moisture 35%  status Stress) Tj
+T*
+(  B1  health 80  moisture 45%  status Optimal) Tj
+T*
+() Tj
+T*
+(Notes: Water stress developing in Zone A2. Rain probability) Tj
+T*
+(below 20% for the next 72 hours. Targeted irrigation advised.) Tj
+T*
+() Tj
+T*
+(AgriVision Command Deck - simulated dataset.) Tj
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000247 00000 n 
+0000000317 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1172
+%%EOF

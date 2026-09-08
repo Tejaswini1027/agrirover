@@ -1,0 +1,50 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>AgriVision model check</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body style="font-family:system-ui,monospace;padding:14px;background:#0b0f0c;color:#eee;font-size:13px;line-height:1.5">
+<h3 style="color:#9ef25a;margin:0 0 8px">AgriVision model check</h3>
+<div id="out">running…</div>
+<script>
+const files = [
+  'tiny_face_detector_model-weights_manifest.json',
+  'tiny_face_detector_model-shard1',
+  'face_landmark_68_model-weights_manifest.json',
+  'face_landmark_68_model-shard1',
+  'face_recognition_model-weights_manifest.json',
+  'face_recognition_model-shard1',
+  'face_recognition_model-shard2',
+];
+const out = document.getElementById('out');
+out.textContent = '';
+const line = (html) => { const d = document.createElement('div'); d.innerHTML = html; out.appendChild(d); };
+line(`<b>origin:</b> ${location.origin}`);
+line(`<b>secureContext:</b> ${window.isSecureContext}`);
+line(`<b>getUserMedia:</b> ${!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)}`);
+line('<hr style="border-color:#333">');
+(async () => {
+  let bad = 0;
+  for (const f of files) {
+    const url = '/models/' + f;
+    try {
+      const t0 = performance.now();
+      const r = await fetch(url, { cache: 'no-store' });
+      const buf = await r.arrayBuffer();
+      const ms = Math.round(performance.now() - t0);
+      const head = new Uint8Array(buf.slice(0, 1));
+      const looksHtml = head[0] === 0x3c; // '<'
+      const ok = r.ok && buf.byteLength > 0 && !looksHtml;
+      if (!ok) bad++;
+      line(`${ok ? '<span style="color:#9ef25a">OK  </span>' : '<span style="color:#f47b7e">FAIL</span>'} ${f} — HTTP ${r.status}, ${buf.byteLength} bytes, ${ms}ms${looksHtml ? ' <b style="color:#f47b7e">(HTML returned!)</b>' : ''}`);
+    } catch (e) {
+      bad++;
+      line(`<span style="color:#f47b7e">FAIL</span> ${f} — ${e.name}: ${e.message}`);
+    }
+  }
+  line('<hr style="border-color:#333">');
+  line(bad === 0
+    ? '<b style="color:#9ef25a">All model files reachable from this device.</b>'
+    : `<b style="color:#f47b7e">${bad} file(s) failed — this is why the model will not load.</b>`);
+})();
+</script>
+</body></html>
