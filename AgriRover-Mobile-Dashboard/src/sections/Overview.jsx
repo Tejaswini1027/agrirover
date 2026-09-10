@@ -1,10 +1,14 @@
+import { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import Icon from '../components/Icon';
 import Panel from '../components/Panel';
 import StatTile from '../components/StatTile';
 import Gauge from '../components/Gauge';
-import GpsGlobe from '../components/GpsGlobe';
 import Counter from '../components/motion/Counter';
+
+// Heavy (three.js) — kept out of the initial bundle so it can't slow the
+// rest of the dashboard. Only the Field Map area inside this card changes.
+const EarthGlobe = lazy(() => import('../components/EarthGlobe'));
 import { RevealGroup, RevealItem } from '../components/motion/Reveal';
 import { useNav } from '../context/NavContext';
 import { useT } from '../context/LanguageContext';
@@ -45,7 +49,9 @@ export default function Overview() {
                         {t('Open Field Ops')} <Icon name="arrow_forward" size={14} />
                     </button>
                 }>
-                    <GpsGlobe height={260} />
+                    <Suspense fallback={<div className="w-full rounded-2xl border border-line" style={{ height: 260, background: 'radial-gradient(120% 120% at 50% 30%, #0b1830 0%, #05080f 60%, #02040a 100%)' }} />}>
+                        <EarthGlobe height={260} />
+                    </Suspense>
                 </Panel>
 
                 <motion.div
